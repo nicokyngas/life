@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(life VERSION 0.1 LANGUAGES CXX)
 
+include_directories(src)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -15,17 +17,17 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        cell.h
-        cell.cpp
-        board.h
-        board.cpp
-        board_view_qt.h
-        board_view_qt.cpp
-        definitions.h
+        src/main.cpp
+        src/qt/mainwindow.cpp
+        src/qt/mainwindow.h
+        src/qt/mainwindow.ui
+        src/cell.h
+        src/cell.cpp
+        src/board.h
+        src/board.cpp
+        src/qt/board_view_qt.h
+        src/qt/board_view_qt.cpp
+        src/definitions.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
