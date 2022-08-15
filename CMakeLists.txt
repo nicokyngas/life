@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
         board.cpp
         board_view_qt.h
         board_view_qt.cpp
+        definitions.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

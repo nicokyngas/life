@@ -1,3 +1,11 @@
+/**
+ * @file mainwindow.h
+ *
+ * @brief Qt-generated header file for the displayed main window
+ *
+ */
+
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

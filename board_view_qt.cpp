@@ -1,8 +1,9 @@
 #include "board_view_qt.h"
 
-namespace life {
+namespace life
+{
 
-    board_view_qt::board_view_qt(unsigned short size, QWidget *parent)
+    board_view_qt::board_view_qt(board_dimension_type size, QWidget *parent)
         : QWidget(parent), board(size), grid(this)
     {
         this->grid.setSpacing(1);
@@ -12,6 +13,7 @@ namespace life {
 
     void board_view_qt::paintEvent(QPaintEvent *event)
     {
+        // Must update the child cells, otherwise they won't be repainted
         for (const auto &c : this->cells){
             c->update();
         }
@@ -32,7 +34,7 @@ namespace life {
             delete child;
         }
         this->cells.clear();
-        // Ensure space and add new items
+        // Ensure space and add+format new items
         this->cells.reserve(newSize*newSize);
         for (int i = 0; i < newSize*newSize; ++i){
             const int row = i / newSize;
@@ -57,7 +59,7 @@ namespace life {
 
     void cell_view_qt::paintEvent(QPaintEvent *event)
     {
-		// Lazy binding to the right palette
+        // Lazily bind to the corresponding cell data to get the right color
         static QPalette black(Qt::black, Qt::black);
         static QPalette white(Qt::white, Qt::white);
         this->setPalette(this->cell->isAlive() ? black : white);

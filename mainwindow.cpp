@@ -1,7 +1,8 @@
+#include <QTimer>
+
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "board_view_qt.h"
-#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -9,20 +10,21 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Create the board view and add it to the UI
     life::board_view_qt *board = new life::board_view_qt(10, this);
     QGridLayout *layout = new QGridLayout(this);
     layout->addWidget(board, 0, 0, {Qt::AlignTop, Qt::AlignLeft});
     this->setLayout(layout);
 
-    auto sizeWidget = this->findChild<QSpinBox*>("boardDim");
+    // Apply superglue between the various UI elements
+    QSpinBox *sizeWidget = this->findChild<QSpinBox*>("boardDim");
     connect(sizeWidget, SIGNAL(valueChanged(int)), board, SLOT(resize(int)));
-    auto nextStateButton = this->findChild<QPushButton*>("goToNextState");
+    QPushButton *nextStateButton = this->findChild<QPushButton*>("goToNextState");
     connect(nextStateButton, SIGNAL(clicked()), board, SLOT(nextState()));
-    auto runCB = this->findChild<QCheckBox*>("runCB");
+    QCheckBox *runCB = this->findChild<QCheckBox*>("runCB");
 
     QTimer *runTimer = new QTimer(runCB);
     runTimer->setInterval(500);
-    //connect(runTimer, &QTimer::timeout, board, SLOT(nextState()));
     connect(runTimer, SIGNAL(timeout()), board, SLOT(nextState()));
     connect(runCB, &QCheckBox::toggled, runTimer, [runTimer] (bool checked) {
         if (checked)
@@ -40,7 +42,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(runCB, &QCheckBox::toggled, sizeWidget, [sizeWidget] (bool checked) {
         sizeWidget->setEnabled(!checked);
     });
-    this->children();
 
 }
 

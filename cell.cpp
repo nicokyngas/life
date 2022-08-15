@@ -2,11 +2,12 @@
 
 #include <QDebug>
 
-namespace life {
+namespace life
+{
 
-    cell::cell(unsigned short x, unsigned short y, bool alive) : x(x), y(y), alive(alive)
+    cell::cell(board_dimension_type x, board_dimension_type y, bool alive)
+        : x(x), y(y), alive(alive)
     {
-
     }
 
     cell cell::nextState(unsigned short aliveNeighbors) const
@@ -30,12 +31,12 @@ namespace life {
         this->alive = !this->alive;
     }
 
-    unsigned short cell::getX() const
+    board_dimension_type cell::getX() const
     {
         return this->x;
     }
 
-    unsigned short cell::getY() const
+    board_dimension_type cell::getY() const
     {
         return this->y;
     }

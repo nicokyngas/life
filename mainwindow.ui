@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>The Game of Life</string>
   </property>
   <widget class="QSpinBox" name="boardDim">
    <property name="geometry">
